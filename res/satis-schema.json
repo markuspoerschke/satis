@@ -308,6 +308,10 @@
             "type": "string",
             "description": "a URL that will be called every time a user installs a package."
         },
+        "rewrite-source-urls": {
+            "type": "object",
+            "description": "a key (search) value (replace) pair of source URLs that should be rewritten."
+        },
         "_comment": {
             "type": ["array", "string"],
             "description": "A key to store comments in"

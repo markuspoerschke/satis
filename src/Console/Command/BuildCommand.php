@@ -23,6 +23,7 @@ use Composer\Satis\Builder\PackagesBuilder;
 use Composer\Satis\Builder\WebBuilder;
 use Composer\Satis\Console\Application;
 use Composer\Satis\PackageSelection\PackageSelection;
+use Composer\Satis\Utility\SourceUrlRewriter;
 use Composer\Util\RemoteFilesystem;
 use JsonSchema\Validator;
 use Seld\JsonLint\JsonParser;
@@ -191,6 +192,10 @@ EOT
         }
 
         $packages = $packageSelection->clean();
+
+        if (isset($config['rewrite-source-urls'])) {
+            (new SourceUrlRewriter($config['rewrite-source-urls']))->rewriteUrls($packages);
+        }
 
         if ($packageSelection->hasFilterForPackages() || $packageSelection->hasRepositoryFilter()) {
             // in case of an active filter we need to load the dumped packages.json and merge the
